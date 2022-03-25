@@ -21,6 +21,7 @@ export const Banner = ({ purpose, title1, title2, desc1, desc2, buttonText, link
 
 
 const Home = ({ propertiesForSale, propertiesForRent }) => (
+ 
   <Box>
     <Banner
       purpose='RENT A HOME'
@@ -51,16 +52,23 @@ const Home = ({ propertiesForSale, propertiesForRent }) => (
   </Box>
 );
 
-export async function getStaticProps() {
-  const propertyForSale = await fetchApi(`${baseUrl}/properties/list?locationExternalIDs=5002&purpose=for-sale&hitsPerPage=6`);
-  const propertyForRent = await fetchApi(`${baseUrl}/properties/list?locationExternalIDs=5002&purpose=for-rent&hitsPerPage=6`);
+
+export const getStaticProps = async() => {
+  const propertyForSale = await fetchApi(`${baseUrl}/properties/list-residential?LatitudeMax=81.14747595814636&LatitudeMin=-22.26872153207163&LongitudeMax=-10.267941690981388&LongitudeMin=-136.83037765324116&CurrentPage=1&RecordsPerPage=10`);
+  const propertyForRent = await fetchApi(`${baseUrl}/properties/list-residential?LatitudeMax=81.14747595814636&LatitudeMin=-22.26872153207163&LongitudeMax=-10.267941690981388&LongitudeMin=-136.83037765324116&CurrentPage=1&RecordsPerPage=10`);
+
+  console.log("Testtt", propertyForSale.Results[0]);
 
   return {
     props: {
       propertiesForSale: propertyForSale?.hits,
       propertiesForRent: propertyForRent?.hits,
     },
+
+    
   };
-}
+ 
+  
+};
 
 export default Home;

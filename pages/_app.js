@@ -5,7 +5,7 @@ import { ChakraProvider } from '@chakra-ui/react';
 
 import Layout from '../components/Layout';
 
-function MyApp({ Component, pageProps }) {
+const MyApp = function({ Component, pageProps })  {
   NProgress.configure({ showSpinner: false });
 
   Router.events.on('routeChangeStart', () => {
@@ -28,6 +28,6 @@ function MyApp({ Component, pageProps }) {
       </ChakraProvider>
     </>
   );
-}
+};
 
 export default MyApp;

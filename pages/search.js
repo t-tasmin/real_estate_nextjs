@@ -1,13 +1,13 @@
 import { useState } from 'react';
 import { useRouter } from 'next/router';
-import Image from 'next/image'
+import Image from 'next/image';
 import { Flex, Box, Text, Icon } from '@chakra-ui/react';
 import { BsFilter } from 'react-icons/bs';
 
 import Property from '../components/Property';
 import SearchFilters from '../components/SearchFilters';
 import { baseUrl, fetchApi } from '../utils/fetchApi';
-import noresult from '../assets/images/noresult.svg'
+import noresult from '../assets/images/noresult.svg';
 
 const Search = ({ properties }) => {
   const [searchFilters, setSearchFilters] = useState(false);
@@ -47,7 +47,7 @@ const Search = ({ properties }) => {
   );
 };
 
-export async function getServerSideProps({ query }) {
+export const getServerSideProps = async({ query }) => {
   const purpose = query.purpose || 'for-rent';
   const rentFrequency = query.rentFrequency || 'yearly';
   const minPrice = query.minPrice || '0';
@@ -66,6 +66,6 @@ export async function getServerSideProps({ query }) {
       properties: data?.hits,
     },
   };
-}
+};
 
 export default Search;
